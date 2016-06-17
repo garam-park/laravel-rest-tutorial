@@ -18,3 +18,28 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+//Create
+Route::post('/books', function(){
+  return 'create book';
+});
+
+//Read List
+Route::get('/books', function(){
+  return 'read list of book';
+});
+
+//Read Detail
+Route::get('/books/{id}', function($id){
+  return 'read book '.$id;
+});
+
+//Update
+Route::put('/books/{id}', function($id){
+  return 'update book '.$id;
+});
+
+//Delete
+Route::delete('/books/{id}', function($id){
+  return 'delete book '.$id;
+});
