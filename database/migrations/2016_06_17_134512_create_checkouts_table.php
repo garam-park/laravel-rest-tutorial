@@ -13,7 +13,7 @@ class CreateCheckoutsTable extends Migration
     public function up()
     {
         Schema::create('checkouts', function (Blueprint $table) {
-            $table->increments('id');
+
             $table->integer('book_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->boolean('returned');
@@ -26,6 +26,8 @@ class CreateCheckoutsTable extends Migration
             $table->foreign('book_id')
             ->references('id')->on('books')
             ->onDelete('cascade');
+
+            $table->primary(['book_id', 'user_id']);
         });
     }
 

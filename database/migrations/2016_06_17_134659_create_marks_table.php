@@ -13,7 +13,7 @@ class CreateMarksTable extends Migration
     public function up()
     {
         Schema::create('marks', function (Blueprint $table) {
-            $table->increments('id');
+
             $table->integer('book_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
@@ -25,6 +25,8 @@ class CreateMarksTable extends Migration
             $table->foreign('book_id')
             ->references('id')->on('books')
             ->onDelete('cascade');
+
+            $table->primary(['book_id', 'user_id']);
         });
     }
 
