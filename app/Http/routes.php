@@ -21,25 +21,35 @@ Route::get('/home', 'HomeController@index');
 
 //Create
 Route::post('/books', function(){
-  return 'create book';
+
+  $request = Request::all();
+
+  $new_book = App\Book::create($request);
+
+  return $new_book;
 });
 
 //Read List
 Route::get('/books', function(){
-  return 'read list of book';
+  return App\Book::all();
 });
 
 //Read Detail
 Route::get('/books/{id}', function($id){
-  return 'read book '.$id;
+  return App\Book::find($id);
 });
 
 //Update
 Route::put('/books/{id}', function($id){
-  return 'update book '.$id;
+  $request = Request::all();
+  App\Book::where('id', $id)
+          ->update($request);
+  return App\Book::find($id);
 });
 
 //Delete
 Route::delete('/books/{id}', function($id){
-  return 'delete book '.$id;
+  $book = App\Book::find($id);
+  $book->delete();
+  return $book;
 });
