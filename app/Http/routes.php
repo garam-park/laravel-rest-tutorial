@@ -53,3 +53,26 @@ Route::delete('/books/{id}', function($id){
   $book->delete();
   return $book;
 });
+
+
+//Checkout
+Route::post('/checkout', function(){
+
+  $request = Request::all();
+
+  $checkout = App\Checkout::Create($request);
+
+  return $checkout;
+});
+
+//Return
+Route::post('/return/{book_id}', function($book_id){
+
+  $checkout = App\Checkout::where('book_id',$book_id)->first();
+
+  $checkout->returned = true;
+
+  $checkout->save();
+
+  return $checkout;
+});
